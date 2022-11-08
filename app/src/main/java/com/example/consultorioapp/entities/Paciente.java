@@ -11,15 +11,17 @@ public class Paciente implements Serializable {
     private String nome;
     private String sexo;
     private String modalidade;
+    private String modalidade2;
     private String horario;
 
     public Paciente() {
     }
 
-    public Paciente(String nome, String sexo, String modalidade, String horario) {
+    public Paciente(String nome, String sexo, String modalidade, String modalidade2, String horario) {
         this.nome = nome;
         this.sexo = sexo;
         this.modalidade = modalidade;
+        this.modalidade2 = modalidade2;
         this.horario = horario;
     }
 
@@ -55,6 +57,14 @@ public class Paciente implements Serializable {
         this.modalidade = modalidade;
     }
 
+    public String getModalidade2() {
+        return modalidade2;
+    }
+
+    public void setModalidade2(String modalidade2) {
+        this.modalidade2 = modalidade2;
+    }
+
     public String getHorario() {
         return horario;
     }
@@ -65,7 +75,7 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return nome + " | " + sexo + " | " + modalidade + " | " + horario;
+        return nome + " | " + sexo + " | " + modalidade + " | " + modalidade2 + " | " + horario;
     }
 
     @Override

@@ -80,7 +80,7 @@ public class Fomulario extends AppCompatActivity {
                 paciente.setModalidade(checkBoxPresencial.getText().toString());
             }
             if(checkBoxOnline.isChecked()){
-                paciente.setModalidade(checkBoxOnline.getText().toString());
+                paciente.setModalidade2(checkBoxOnline.getText().toString());
             }
             paciente.setHorario(spinnerHorarios.getSelectedItem().toString());
             if(acao.equals("inserir")){
@@ -112,8 +112,8 @@ public class Fomulario extends AppCompatActivity {
         if(paciente.getModalidade().equals(checkBoxPresencial.getText().toString())){
             checkBoxPresencial.setText(paciente.getModalidade());
         }
-        if(paciente.getModalidade().equals(checkBoxOnline.getText().toString())){
-            checkBoxOnline.setText(paciente.getModalidade());
+        if(paciente.getModalidade2().equals(checkBoxOnline.getText().toString())){
+            checkBoxOnline.setText(paciente.getModalidade2());
         }
         String[] horarios = getResources().getStringArray(R.array.strHorarios);
         for(int i = 0; i < horarios.length; i++){

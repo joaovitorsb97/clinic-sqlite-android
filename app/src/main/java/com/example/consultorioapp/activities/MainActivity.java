@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public void carregarPacientes() {
         listaPacientes = PacienteDAO.getPaciente(this);
         if(listaPacientes.size() == 0){
-            Paciente obj = new Paciente("Lista vazia...", "", "", "");
+            Paciente obj = new Paciente("Lista vazia...", "", "", "", "");
             listaPacientes.add(obj);
             lvPacientes.setEnabled(false);
         }else{

@@ -20,7 +20,8 @@ public class Banco extends SQLiteOpenHelper {
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 "nome TEXT NOT NULL, " +
                 "sexo TEXT NOT NULL, " +
-                "modalidade TEXT NOT NULL, " +
+                "modalidade TEXT, " +
+                "modalidade2 TEXT, " +
                 "horario TEXT)");
     }
 

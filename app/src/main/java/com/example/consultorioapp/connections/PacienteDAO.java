@@ -20,6 +20,7 @@ public class PacienteDAO {
         values.put("nome", paciente.getNome());
         values.put("sexo", paciente.getSexo());
         values.put("modalidade", paciente.getModalidade());
+        values.put("modalidade2", paciente.getModalidade2());
         values.put("horario", paciente.getHorario());
 
         Banco conn = new Banco(context);
@@ -34,6 +35,7 @@ public class PacienteDAO {
         values.put("nome", paciente.getNome());
         values.put("sexo", paciente.getSexo());
         values.put("modalidade", paciente.getModalidade());
+        values.put("modalidade2", paciente.getModalidade2());
         values.put("horario", paciente.getHorario());
 
         Banco conn = new Banco(context);
@@ -63,7 +65,8 @@ public class PacienteDAO {
                 paciente.setNome(cursor.getString(1));
                 paciente.setSexo(cursor.getString(2));
                 paciente.setModalidade(cursor.getString(3));
-                paciente.setHorario(cursor.getString(4));
+                paciente.setModalidade2(cursor.getString(4));
+                paciente.setHorario(cursor.getString(5));
                 list.add(paciente);
             }while (cursor.moveToNext());
         }
@@ -81,7 +84,8 @@ public class PacienteDAO {
             paciente.setNome(cursor.getString(1));
             paciente.setSexo(cursor.getString(2));
             paciente.setModalidade(cursor.getString(3));
-            paciente.setHorario(cursor.getString(4));
+            paciente.setModalidade2(cursor.getString(4));
+            paciente.setHorario(cursor.getString(5));
             return paciente;
         }
         else{
