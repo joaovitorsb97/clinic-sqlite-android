@@ -1,12 +1,11 @@
-package com.example.consultorioapp.connections;
+package com.example.consultorioapp.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.CheckBox;
 
-import com.example.consultorioapp.activities.Fomulario;
+import com.example.consultorioapp.connections.Banco;
 import com.example.consultorioapp.entities.Paciente;
 
 import java.util.ArrayList;

@@ -8,15 +8,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.consultorioapp.entities.Paciente;
-import com.example.consultorioapp.connections.PacienteDAO;
+import com.example.consultorioapp.daos.PacienteDAO;
 import com.example.consultorioapp.R;
 
-public class Fomulario extends AppCompatActivity {
+public class FomularioActivity extends AppCompatActivity {
 
     private EditText editNome;
     private RadioButton radioButtonMasculino;
@@ -106,13 +105,12 @@ public class Fomulario extends AppCompatActivity {
         editNome.setText(paciente.getNome());
         if(paciente.getSexo().equals(radioButtonMasculino.getText().toString())){
             radioButtonMasculino.setText(paciente.getSexo());
-        }else{
+        }else {
             radioButtonFeminino.setText(paciente.getSexo());
         }
         if(paciente.getModalidade().equals(checkBoxPresencial.getText().toString())){
             checkBoxPresencial.setText(paciente.getModalidade());
-        }
-        if(paciente.getModalidade2().equals(checkBoxOnline.getText().toString())){
+        }else{
             checkBoxOnline.setText(paciente.getModalidade2());
         }
         String[] horarios = getResources().getStringArray(R.array.strHorarios);

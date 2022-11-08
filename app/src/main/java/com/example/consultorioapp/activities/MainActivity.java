@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.consultorioapp.entities.Paciente;
-import com.example.consultorioapp.connections.PacienteDAO;
+import com.example.consultorioapp.daos.PacienteDAO;
 import com.example.consultorioapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Fomulario.class);
+                Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
                 intent.putExtra("acao", "inserir");
                 startActivity(intent);
             }
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Integer idPaciente = listaPacientes.get(i).getId();
                 System.out.println("id::: " + listaPacientes.get(i).getId() + ".........");
-                Intent intent = new Intent(MainActivity.this, Fomulario.class);
+                Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
                 intent.putExtra("acao", "editar");
                 intent.putExtra("idPaciente", idPaciente);
                 startActivity(intent);
