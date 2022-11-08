@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grandient_background"
-    tools:context=".Fomulario">
+    tools:context=".activities.Fomulario">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -32,20 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewSubTitulo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/eb_garamond"
-        android:text="Formulário de cadastro de pacientes"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo2" />
-
     <LinearLayout
         android:layout_width="393dp"
         android:layout_height="521dp"
@@ -53,8 +39,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubTitulo2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textViewTextoFormulario"
@@ -96,20 +81,27 @@
             android:layout_margin="5dp"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="Data de nascimento:"
+            android:text="Sexo:"
             android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/editNascimento"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:ems="10"
-            android:hint="dd/MM/yyyy"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:padding="5dp" />
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonMasculino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masculino" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFeminino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textViewTelefone"
@@ -118,20 +110,29 @@
             android:layout_margin="5dp"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="Telefone:"
+            android:text="Modalidade do atendimento:"
             android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/editTelefone"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:ems="10"
-            android:hint="(51) 9XXXX-XXXX"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:padding="5dp" />
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBoxPresencial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Presencial" />
+
+            <CheckBox
+                android:id="@+id/checkBoxOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Online" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textViewHorario"

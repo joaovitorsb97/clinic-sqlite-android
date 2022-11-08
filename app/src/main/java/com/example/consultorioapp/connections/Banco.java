@@ -1,4 +1,4 @@
-package com.example.consultorioapp;
+package com.example.consultorioapp.connections;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,11 +16,11 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS paciente("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS pacientes("+
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 "nome TEXT NOT NULL, " +
-                "nascimento text NOT NULL, " +
-                "telefone TEXT NOT NULL, " +
+                "sexo TEXT NOT NULL, " +
+                "modalidade TEXT NOT NULL, " +
                 "horario TEXT)");
     }
 

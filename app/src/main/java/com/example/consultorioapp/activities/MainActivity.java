@@ -1,4 +1,4 @@
-package com.example.consultorioapp;
+package com.example.consultorioapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.consultorioapp.entities.Paciente;
+import com.example.consultorioapp.connections.PacienteDAO;
+import com.example.consultorioapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Long idPaciente = listaPacientes.get(i).getId();
+                Integer idPaciente = listaPacientes.get(i).getId();
                 System.out.println("id::: " + listaPacientes.get(i).getId() + ".........");
                 Intent intent = new Intent(MainActivity.this, Fomulario.class);
                 intent.putExtra("acao", "editar");

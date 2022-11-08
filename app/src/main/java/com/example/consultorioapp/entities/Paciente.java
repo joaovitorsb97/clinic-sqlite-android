@@ -1,4 +1,4 @@
-package com.example.consultorioapp;
+package com.example.consultorioapp.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,27 +7,27 @@ public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
     private String nome;
-    private String nascimento;
-    private String telefone;
+    private String sexo;
+    private String modalidade;
     private String horario;
 
     public Paciente() {
     }
 
-    public Paciente(String nome, String nascimento, String telefone, String horario) {
+    public Paciente(String nome, String sexo, String modalidade, String horario) {
         this.nome = nome;
-        this.nascimento = nascimento;
-        this.telefone = telefone;
+        this.sexo = sexo;
+        this.modalidade = modalidade;
         this.horario = horario;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,20 +39,20 @@ public class Paciente implements Serializable {
         this.nome = nome;
     }
 
-    public String getNascimento() {
-        return nascimento;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setNascimento(String nascimento) {
-        this.nascimento = nascimento;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getModalidade() {
+        return modalidade;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setModalidade(String modalidade) {
+        this.modalidade = modalidade;
     }
 
     public String getHorario() {
@@ -61,6 +61,11 @@ public class Paciente implements Serializable {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    @Override
+    public String toString() {
+        return nome + " | " + sexo + " | " + modalidade + " | " + horario;
     }
 
     @Override
