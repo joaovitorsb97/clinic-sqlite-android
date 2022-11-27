@@ -108,11 +108,8 @@ public class FomularioActivity extends AppCompatActivity {
         }else {
             radioButtonFeminino.setText(paciente.getSexo());
         }
-        if(paciente.getModalidade().equals(checkBoxPresencial.getText().toString())){
-            checkBoxPresencial.setText(paciente.getModalidade());
-        }else{
-            checkBoxOnline.setText(paciente.getModalidade2());
-        }
+        checkBoxPresencial.setText(paciente.getModalidade());
+        checkBoxOnline.setText(paciente.getModalidade2());
         String[] horarios = getResources().getStringArray(R.array.strHorarios);
         for(int i = 0; i < horarios.length; i++){
             if(paciente.getHorario().equals(horarios[i])){
