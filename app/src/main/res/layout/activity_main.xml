@@ -26,7 +26,7 @@
         android:id="@+id/textViewTItulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/eb_garamond"
         android:text="Consultório Fulano"
         android:textColor="@color/white"
@@ -40,7 +40,7 @@
         android:id="@+id/imageView"
         android:layout_width="59dp"
         android:layout_height="58dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewTItulo"
@@ -51,8 +51,6 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/roudstyle"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,16 +60,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/listPacientes"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPacientes"
                 android:layout_width="match_parent"
-                android:layout_height="517dp"
-                android:background="@drawable/roudstyle"
-                tools:ignore="NestedScrolling" />
-
+                android:layout_height="425dp" />
         </LinearLayout>
     </ScrollView>
 

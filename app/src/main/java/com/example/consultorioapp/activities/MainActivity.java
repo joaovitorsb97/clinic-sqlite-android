@@ -2,6 +2,8 @@ package com.example.consultorioapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,24 +13,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.consultorioapp.adapters.MyAdapter;
 import com.example.consultorioapp.entities.Paciente;
 import com.example.consultorioapp.daos.PacienteDAO;
 import com.example.consultorioapp.R;
+import com.example.consultorioapp.utils.recyclerview.RecyclerViewInterface;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
-    private ListView lvPacientes;
-    private ArrayAdapter adapter;
+    private RecyclerView rvPacientes;
     private List<Paciente> listaPacientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lvPacientes = findViewById(R.id.listPacientes);
+        rvPacientes = (RecyclerView) findViewById(R.id.rvPacientes);
+        rvPacientes.setLayoutManager(new LinearLayoutManager(this));
         carregarPacientes();
         FloatingActionButton fab = findViewById(R.id.fabIncluirPaciente);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,27 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
                 intent.putExtra("acao", "inserir");
                 startActivity(intent);
-            }
-        });
-
-        lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Integer idPaciente = listaPacientes.get(i).getId();
-                System.out.println("id::: " + listaPacientes.get(i).getId() + ".........");
-                Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
-                intent.putExtra("acao", "editar");
-                intent.putExtra("idPaciente", idPaciente);
-                startActivity(intent);
-            }
-        });
-
-        lvPacientes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("Entrou clique longo");
-                excluir(i);
-                return true;
             }
         });
     }
@@ -90,11 +73,28 @@ public class MainActivity extends AppCompatActivity {
         if(listaPacientes.size() == 0){
             Paciente obj = new Paciente("Lista vazia...", "", "", "", "");
             listaPacientes.add(obj);
-            lvPacientes.setEnabled(false);
+            rvPacientes.setEnabled(false);
         }else{
-            lvPacientes.setEnabled(true);
+            rvPacientes.setEnabled(true);
         }
-        adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, listaPacientes);
-        lvPacientes.setAdapter(adapter);
+        MyAdapter adapter = new MyAdapter(listaPacientes, this);
+        rvPacientes.setAdapter(adapter);
+    }
+
+    @Override
+    public void OnItemCLick(int position) {
+        Integer idPaciente = listaPacientes.get(position).getId();
+        System.out.println("id::: " + listaPacientes.get(position).getId() + ".........");
+        Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
+        intent.putExtra("acao", "editar");
+        intent.putExtra("idPaciente", idPaciente);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean OnItemLongClick(int position) {
+        System.out.println("Entrou clique longo");
+        excluir(position);
+        return true;
     }
 }

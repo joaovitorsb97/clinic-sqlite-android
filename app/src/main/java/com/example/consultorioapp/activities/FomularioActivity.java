@@ -82,7 +82,7 @@ public class FomularioActivity extends AppCompatActivity {
                 paciente.setModalidade2(checkBoxOnline.getText().toString());
             }
             paciente.setHorario(spinnerHorarios.getSelectedItem().toString());
-            if(acao.equals("inserir")){
+            if(acao.equals("inserir"))  {
                 PacienteDAO.inserir(this, paciente);
                 editNome.setText("");
                 radioButtonMasculino.setText("");
@@ -90,9 +90,12 @@ public class FomularioActivity extends AppCompatActivity {
                 checkBoxPresencial.setText("");
                 checkBoxOnline.setText("");
                 spinnerHorarios.setSelection(0, true);
+                Toast.makeText(getApplicationContext(), "Dados inseridos com sucesso", Toast.LENGTH_LONG).show();
+
             }
             else{
                 PacienteDAO.editar(this, paciente);
+                Toast.makeText(getApplicationContext(), "Dados editados com sucesso", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
