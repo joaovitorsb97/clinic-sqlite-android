@@ -7,7 +7,8 @@ public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
+    private String idUsuario;
     private String nome;
     private String sexo;
     private String modalidade;
@@ -17,19 +18,29 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
 
-    public Paciente(String nome, String sexo, String modalidade, String modalidade2, String horario) {
+    public Paciente(String id, String nome, String sexo, String modalidade, String horario) {
+        this.id = id;
+        this.nome = nome;
+        this.sexo = sexo;
+        this.modalidade = modalidade;
+        this.horario = horario;
+    }
+
+    public Paciente(String id, String nome, String sexo, String modalidade, String modalidade2, String horario, String idUsuario) {
+        this.id = id;
         this.nome = nome;
         this.sexo = sexo;
         this.modalidade = modalidade;
         this.modalidade2 = modalidade2;
         this.horario = horario;
+        this.idUsuario = idUsuario;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,20 +68,20 @@ public class Paciente implements Serializable {
         this.modalidade = modalidade;
     }
 
-    public String getModalidade2() {
-        return modalidade2;
-    }
-
-    public void setModalidade2(String modalidade2) {
-        this.modalidade2 = modalidade2;
-    }
-
     public String getHorario() {
         return horario;
     }
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

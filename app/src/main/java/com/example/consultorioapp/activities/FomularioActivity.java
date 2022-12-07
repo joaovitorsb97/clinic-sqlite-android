@@ -1,5 +1,6 @@
 package com.example.consultorioapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -12,8 +13,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.consultorioapp.entities.Paciente;
-import com.example.consultorioapp.daos.PacienteDAO;
+
 import com.example.consultorioapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FomularioActivity extends AppCompatActivity {
 
@@ -27,10 +31,27 @@ public class FomularioActivity extends AppCompatActivity {
     private String acao;
     private Paciente paciente;
 
+
+    //**************FIREBASE ***********************//
+    private FirebaseDatabase firebaseDatabase;
+    //classe que faz referencia ao banco de dados
+    private DatabaseReference reference;
+    // classe que aponta para um nó do banco
+    private FirebaseAuth auth;
+    //classe responsável pela autenticação
+    private FirebaseAuth.AuthStateListener authStateListener;
+    //Classe responsável por ficar "ouvindo" as mudanças na autenticação
+//**************FIREBASE ***********************//
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fomulario);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference();
 
         editNome = findViewById(R.id.editNome);
         radioButtonMasculino = findViewById(R.id.radioButtonMasculino);
@@ -51,7 +72,22 @@ public class FomularioActivity extends AppCompatActivity {
             }
         });
 
+        //**************FIREBASE ***********************//
+        auth = FirebaseAuth.getInstance();
+        //Fica "escutando" as mudanças
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if( auth.getCurrentUser() == null ){
+                    finish();
+                }
+            }
+        };
+        auth.addAuthStateListener( authStateListener ); //adiciona um ouvinte
+        //**************FIREBASE ***********************//
     }
+
+
 
     public void salvar() {
 
@@ -78,12 +114,13 @@ public class FomularioActivity extends AppCompatActivity {
             if(checkBoxPresencial.isChecked()){
                 paciente.setModalidade(checkBoxPresencial.getText().toString());
             }
-            if(checkBoxOnline.isChecked()){
-                paciente.setModalidade2(checkBoxOnline.getText().toString());
+            else{
+                paciente.setModalidade(checkBoxOnline.getText().toString());
             }
             paciente.setHorario(spinnerHorarios.getSelectedItem().toString());
+            paciente.setIdUsuario(auth.getCurrentUser().getUid());
             if(acao.equals("inserir"))  {
-                PacienteDAO.inserir(this, paciente);
+                reference.child("pacientes").push().setValue(paciente);
                 editNome.setText("");
                 radioButtonMasculino.setText("");
                 radioButtonMasculino.setText("");
@@ -94,8 +131,9 @@ public class FomularioActivity extends AppCompatActivity {
 
             }
             else{
-                PacienteDAO.editar(this, paciente);
-                Toast.makeText(getApplicationContext(), "Dados editados com sucesso", Toast.LENGTH_LONG).show();
+                String idPaciente = paciente.getId();
+                paciente.setId(null);
+                reference.child("pacientes").child(idPaciente).setValue(paciente);
                 finish();
             }
         }
@@ -103,16 +141,24 @@ public class FomularioActivity extends AppCompatActivity {
 
     public void carregarFormulario() {
 
-        Integer id = getIntent().getIntExtra("idPaciente", 0);
-        paciente = PacienteDAO.getPacienteById(this, id);
+        String id = getIntent().getStringExtra("idPaciente");
+        paciente = new Paciente();
+        paciente.setId(id);
+        paciente.setId(getIntent().getStringExtra("nome"));
+        paciente.setSexo(getIntent().getStringExtra("sexo"));
+        paciente.setHorario(getIntent().getStringExtra("horario"));
+        paciente.setModalidade(getIntent().getStringExtra("modalidade"));
         editNome.setText(paciente.getNome());
         if(paciente.getSexo().equals(radioButtonMasculino.getText().toString())){
             radioButtonMasculino.setText(paciente.getSexo());
         }else {
             radioButtonFeminino.setText(paciente.getSexo());
         }
-        checkBoxPresencial.setText(paciente.getModalidade());
-        checkBoxOnline.setText(paciente.getModalidade2());
+        if(paciente.getModalidade().equals(checkBoxPresencial.getText().toString())){
+            checkBoxPresencial.setText(paciente.getModalidade());
+        }else {
+            checkBoxOnline.setText(paciente.getModalidade());
+        }
         String[] horarios = getResources().getStringArray(R.array.strHorarios);
         for(int i = 0; i < horarios.length; i++){
             if(paciente.getHorario().equals(horarios[i])){

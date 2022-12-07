@@ -1,5 +1,6 @@
 package com.example.consultorioapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.consultorioapp.R;
 import com.example.consultorioapp.entities.Paciente;
 import com.example.consultorioapp.utils.recyclerview.RecyclerViewInterface;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements RecyclerViewInterface {
 
-    private final RecyclerViewInterface recyclerViewInterface;
-
+    private RecyclerViewInterface recyclerViewInterface;
+    private Context context;
     List<Paciente> listPaciente = new ArrayList<>();
+
+    public MyAdapter(List<Paciente> listPaciente, Context context) {
+        this.listPaciente = listPaciente;
+        this.context = context;
+    }
 
     public MyAdapter(List<Paciente> listPaciente, RecyclerViewInterface recyclerViewInterface) {
         this.listPaciente = listPaciente;
         this.recyclerViewInterface = recyclerViewInterface;
+
     }
 
     @NonNull
@@ -63,6 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
          TextView horario;
 
 
+
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             nome = (TextView) itemView.findViewById(R.id.displayName);
@@ -94,6 +103,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                     return false;
                 }
             });
+
+
+
         }
     }
 
