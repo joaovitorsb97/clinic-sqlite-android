@@ -31,71 +31,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/borboleta" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        app:boxBackgroundColor="#FFFFFF"
-        app:boxStrokeColor="#5E35B1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTItulo2">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/eb_garamond"
-            android:hint="Email"
-            android:textAlignment="viewStart"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold|italic" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        app:boxBackgroundColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEmail">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/eb_garamond"
-            android:hint="Senha"
-            android:textAlignment="viewStart"
-            android:textSize="20sp"
-            android:textStyle="bold|italic" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/btCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginBottom="74dp"
         android:text="Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textInputSenha" />
+        app:layout_constraintStart_toStartOf="@+id/etSenha"
+        app:layout_constraintTop_toBottomOf="@+id/etSenha" />
 
     <Button
         android:id="@+id/btEntrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginBottom="74dp"
         android:backgroundTint="@color/purple_200"
         android:text="Entrar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputSenha" />
+        app:layout_constraintEnd_toEndOf="@+id/etSenha"
+        app:layout_constraintTop_toBottomOf="@+id/etSenha" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTItulo2" />
+
+    <EditText
+        android:id="@+id/etSenha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

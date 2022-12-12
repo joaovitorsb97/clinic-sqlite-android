@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.consultorioapp.R;
@@ -19,8 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextInputEditText textInputEmail;
-    private TextInputEditText textInputSenha;
+    private EditText etEmail;
+    private EditText etSenha;
     private Button btEntrar;
     private Button btCadastrar;
     private FirebaseAuth auth;
@@ -32,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        textInputEmail = findViewById(R.id.textInputEmail);
-        textInputSenha = findViewById(R.id.textInputSenha);
+        etEmail = findViewById(R.id.etEmail);
+        etSenha = findViewById(R.id.etSenha);
         btEntrar = findViewById(R.id.btEntrar);
         btCadastrar = findViewById(R.id.btCadastrar);
 
@@ -67,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void entrar() {
-        String email = textInputEmail.getText().toString();
-        String senha = textInputSenha.getText().toString();
+        String email = etEmail.getText().toString();
+        String senha = etSenha.getText().toString();
         if(email.isEmpty() || senha.isEmpty()){
             Toast.makeText(this, "Todos os campos são obrigatórios!", Toast.LENGTH_LONG).show();
         }else{
@@ -89,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void cadastrar() {
-        String email = textInputEmail.getText().toString();
-        String senha = textInputSenha.getText().toString();
+        String email = etEmail.getText().toString();
+        String senha = etSenha.getText().toString();
         if(email.isEmpty() || senha.isEmpty()){
             Toast.makeText(this, "Todos os campos são obrigatórios!", Toast.LENGTH_LONG).show();
         }

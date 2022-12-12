@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FomularioActivity extends AppCompatActivity {
+public class FormularioActivity extends AppCompatActivity {
 
     private EditText editNome;
     private RadioButton radioButtonMasculino;
@@ -60,6 +60,7 @@ public class FomularioActivity extends AppCompatActivity {
         checkBoxOnline = findViewById(R.id.checkBoxOnline);
         spinnerHorarios = findViewById(R.id.spinnerHorario);
         btSalvar = findViewById(R.id.buttonConfirmar);
+
         acao = getIntent().getStringExtra("acao");
 
         if(acao.equals("editar")){

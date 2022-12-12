@@ -11,10 +11,9 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.example.consultorioapp.adapters.MyAdapter;
 import com.example.consultorioapp.entities.Paciente;
@@ -54,16 +53,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
+                Intent intent = new Intent(MainActivity.this, FormularioActivity.class);
                 intent.putExtra("acao", "inserir");
                 startActivity(intent);
             }
         });
-
+        listaPacientes = new ArrayList<>();
         rvPacientes = (RecyclerView) findViewById(R.id.rvPacientes);
         rvPacientes.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(listaPacientes, this);
-        listaPacientes = new ArrayList<>();
+        rvPacientes.setAdapter(adapter);
+
         auth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
     @Override
     public void OnItemCLick(int position) {
-        Intent intent = new Intent(MainActivity.this, FomularioActivity.class);
+        Intent intent = new Intent(MainActivity.this, FormularioActivity.class);
         intent.putExtra("acao", "editar");
         Paciente pacienteSelecionado = listaPacientes.get(position);
         intent.putExtra("idPaciente", pacienteSelecionado.getId());
@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         reference = firebaseDatabase.getReference();
         query = reference.child("pacientes").orderByChild("nome");
         childEventListener = new ChildEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 try{
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             }
 
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 for (Paciente p : listaPacientes){
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
                 }
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 for (Paciente p : listaPacientes){
@@ -198,7 +201,28 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             listaPacientes.add(fake);
             rvPacientes.setEnabled(false);
         }else{
-                rvPacientes.setEnabled(true);
+            rvPacientes.setEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //menu.add( "Novo item" );
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menuSair) {
+            auth.signOut(); // Logoof do user atual
+        }
+        if( id == R.id.menuAddPaciente){
+            Intent intent = new Intent( MainActivity.this, FormularioActivity.class);
+            intent.putExtra("acao", "inserir");
+            startActivity( intent );
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

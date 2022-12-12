@@ -20,13 +20,8 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements RecyclerViewInterface {
 
     private RecyclerViewInterface recyclerViewInterface;
-    private Context context;
     List<Paciente> listPaciente = new ArrayList<>();
 
-    public MyAdapter(List<Paciente> listPaciente, Context context) {
-        this.listPaciente = listPaciente;
-        this.context = context;
-    }
 
     public MyAdapter(List<Paciente> listPaciente, RecyclerViewInterface recyclerViewInterface) {
         this.listPaciente = listPaciente;
